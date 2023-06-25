@@ -17,3 +17,21 @@ function handleFieldClick(event) {
     const field = event.target;
     field.classList.toggle('occupied');
 }
+const fs = require('fs');
+
+// Pfad zur JSON-Datei
+const filePath = 'E:\InnoTech2\InnoTech2\test';
+
+// Lesen der JSON-Datei
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if (err) {
+    console.error('Die JSON-Datei kann nicht eingelesen werden', err);
+    return;
+  }
+
+  // Verarbeiten der JSON-Daten
+  const jsonData = JSON.parse(data);
+  console.log('JSON-Daten:', jsonData);
+
+  // Codeausführung zu Verarbeitung des Codes
+});
