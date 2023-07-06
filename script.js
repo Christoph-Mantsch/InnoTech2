@@ -1,37 +1,42 @@
-// Generate the fields dynamically
-const container = document.getElementById('field-container');
-for (let i = 1; i <= 9; i++) {
-    const field = document.createElement('div');
-    field.classList.add('field');
-    field.id = 'field-' + i;
-    container.appendChild(field);
+function loadAndDisplayData() {
+  fetch('https://it2wi1.if-lab.de/rest/ft_ablauf')
+    .then(response => response.json())
+    .then(data => {
+      const tableBody = document.querySelector('#table-sm tbody');
+      const hvertikal = 'H-vertikal'; // Hier die gewünschte Kategorie angeben
+      const hhorizontal = 'H-horizontal';
+
+      // Index des aktuellen Elements
+      let currentIndex = 0;
+
+      // Funktion zum Anzeigen des nächsten Werts
+      function showNextValue() {
+        const item = data[currentIndex];
+        const row = document.createElement('tr');
+        const Hvertikal = item.werte[hvertikal];
+        const Hhorizontal = item.werte[hhorizontal];
+
+        row.innerHTML = `
+          <td style="background-color: #fff; color: #000000;">${item.datum}</td>
+          <td style="background-color: #fff; color: #000000;">${Hvertikal}</td>
+          <td style="background-color: #fff; color: #000000;">${Hhorizontal}</td>
+        `;
+        tableBody.innerHTML = ""; // Tabelle leeren
+        tableBody.appendChild(row); // Neue Zeile hinzufügen
+
+        // Aktuellen Index erhöhen
+        currentIndex++;
+
+        // Wenn alle Werte abgearbeitet wurden, Index zurücksetzen
+        if (currentIndex >= data.length) {
+          currentIndex = 0;
+        }
+      }
+
+      // Start der Animation (alle 1 Sekunde)
+      setInterval(showNextValue, 1000);
+    })
+    .catch(error => {
+      console.log("Fehler beim Laden der JSON-Daten:", error);
+    });
 }
-
-// Example: Set field 1 as occupied
-document.getElementById('field-1').classList.add('occupied');
-
-// Example: Handle field click event
-document.getElementById('field-1').addEventListener('click', handleFieldClick);
-
-function handleFieldClick(event) {
-    const field = event.target;
-    field.classList.toggle('occupied');
-}
-const fs = require('fs');
-
-// Pfad zur JSON-Datei
-const filePath = 'E:\InnoTech2\InnoTech2\test';
-
-// Lesen der JSON-Datei
-fs.readFile(filePath, 'utf8', (err, data) => {
-  if (err) {
-    console.error('Die JSON-Datei kann nicht eingelesen werden', err);
-    return;
-  }
-
-  // Verarbeiten der JSON-Daten
-  const jsonData = JSON.parse(data);
-  console.log('JSON-Daten:', jsonData);
-
-  // Codeausführung zu Verarbeitung des Codes
-});

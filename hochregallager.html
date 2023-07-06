@@ -1,0 +1,189 @@
+<html>
+<head>
+  <title>Meine Seite</title>
+  <style>
+    body {
+      background-color: #717e87;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    .navbar {
+      background-color: #314151;
+      color: #fff;
+      padding: 10px;
+    }
+    
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+    
+    .container {
+      margin: 20px;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #fff;
+      color: #000;
+    }
+    
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #314151;
+      color: #fff;
+    }
+    
+    .highlight {
+      background-color: green !important;
+    }
+  </style>
+  <script>
+    let dataIndex = 0;
+    let data = [];
+
+    function loadAndDisplayData() {
+      fetch("https://it2wi1.if-lab.de/rest/ft_ablauf")
+        .then(response => response.json())
+        .then(jsonData => {
+          data = jsonData;
+          displayData();
+        })
+        .catch(error => {
+          console.log("Fehler beim Laden der JSON-Daten:", error);
+        });
+    }
+
+    function displayData() {
+      const table = document.querySelector("#myTable");
+      const valueCell1 = document.getElementById("cell1");
+      const valueCell2 = document.getElementById("cell2");
+      const valueCell3 = document.getElementById("cell3");
+      const item = data[dataIndex];
+      const specificCategory = "H-vertikal"; // Hier die gewünschte Kategorie angeben
+      const specificCategory2 = "H-horizontal";
+      const Hvertikal = item.werte[specificCategory];
+      const Hhorizontal = item.werte[specificCategory2];
+
+      valueCell1.textContent = item.datum;
+      valueCell2.textContent = Hvertikal;
+      valueCell3.textContent = Hhorizontal;
+
+      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
+          (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
+        document.getElementById("cell1").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
+          (parseFloat(Hvertikal) >= 425 && parseFloat(Hvertikal) <= 465)) {
+        document.getElementById("cell4").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
+          (parseFloat(Hvertikal) >= 885 && parseFloat(Hvertikal) <= 915)) {
+        document.getElementById("cell7").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 1610 && parseFloat(Hhorizontal) <= 1640) &&
+          (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
+        document.getElementById("cell2").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 1610 && parseFloat(Hhorizontal) <= 1640) &&
+          (parseFloat(Hvertikal) >= 425 && parseFloat(Hvertikal) <= 465)) {
+        document.getElementById("cell5").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 1610 && parseFloat(Hhorizontal) <= 1640) &&
+          (parseFloat(Hvertikal) >= 885 && parseFloat(Hvertikal) <= 915)) {
+        document.getElementById("cell8").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
+          (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
+        document.getElementById("cell3").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
+          (parseFloat(Hvertikal) >= 425 && parseFloat(Hvertikal) <= 465)) {
+        document.getElementById("cell5").classList.add("highlight");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
+          (parseFloat(Hvertikal) >= 885 && parseFloat(Hvertikal) <= 915)) {
+        document.getElementById("cell9").classList.add("highlight");
+      }
+
+      dataIndex = (dataIndex + 1) % data.length;
+
+      setTimeout(displayData, 1000); // Aktualisierung alle 1 Sekunde
+    }
+
+    // Aufruf der Funktion
+    document.addEventListener("DOMContentLoaded", function () {
+      loadAndDisplayData();
+    });
+  </script>
+</head>
+<body>
+  <div class="navbar">
+    <a href="#">Aufgabe</a>
+  </div>
+
+  <div class="container">
+    <table id="myTable">
+      <tr>
+        <th>Datum</th>
+        <th>Wert H-vertikal</th>
+        <th>Wert H-horizontal</th>
+      </tr>
+      <tr>
+        <td id="cell1"></td>
+        <td id="cell2"></td>
+        <td id="cell3"></td>
+      </tr>
+    </table>
+
+    <table id="secondTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th>2345</th>
+          <th>1625</th>
+          <th>900</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>100</th>
+          <td id="cell1">Zelle 1</td>
+          <td id="cell2">Zelle 2</td>
+          <td id="cell3">Zelle 3</td>
+        </tr>
+        <tr>
+          <th>450</th>
+          <td id="cell4">Zelle 4</td>
+          <td id="cell5">Zelle 5</td>
+          <td id="cell6">Zelle 6</td>
+        </tr>
+        <tr>
+          <th>900</th>
+          <td id="cell7">Zelle 7</td>
+          <td id="cell8">Zelle 8</td>
+          <td id="cell9">Zelle 9</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+    

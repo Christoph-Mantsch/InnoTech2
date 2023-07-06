@@ -19,6 +19,8 @@ belegt. Wenn belegt: Farbe, numerische ID und RFID-Adresse. Wenn aus Information
 o Visualisierung von Belegungsveränderungen jeglicher Fächer
 o Geeignete Visualisierung, die auf Belegungsänderungen aufmerksam macht
 Wichtig: das Programm muss web-basiert funktionieren, also in einem Browser aufrufbar sein!
+
 Bei Fragen stehen wir gerne via Mail oder telefonisch für Auskünfte zur Verfügung.
+
 Mit freundlichen Grüßen
 Spyridon Georg Koustas und Timon Sengewald

@@ -1,12 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hochregallager</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>JSON-Daten anzeigen</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #314151;
+            color: white;
+            padding: 10px;
+        }
+
+        .container {
+            background-color: #717e87;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <div class="container" id="field-container"></div>
+    <div class="navbar">
+        <h1>Website-Titel</h1>
+    </div>
 
-    <script src="script.js"></script>
+    <div class="container">
+        <h2>JSON-Daten anzeigen</h2>
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>H-vertikal</th>
+                    <th>H-horizontal</th>
+                    <th>Referenztaster vertikal</th>
+                    <th>Referenztaster Ausleger vorne</th>
+                    <th>Referenztaster Ausleger hinten</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamically populate the table with JSON data -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        fetch('https://it2wi1.if-lab.de/rest/ft_fach')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#data-table tbody');
+                data.forEach(entry => {
+                    const row = document.createElement('tr');
+                    const hVertikalCell = document.createElement('td');
+                    hVertikalCell.textContent = entry.werte['H-vertikal'];
+                    const hHorizontalCell = document.createElement('td');
+                    hHorizontalCell.textContent = entry.werte['H-horizontal'];
+                    const referenztasterVertikalCell = document.createElement('td');
+                    referenztasterVertikalCell.textContent = entry.werte['Referenztaster vertikal'];
+                    const referenztasterAuslegerVorneCell = document.createElement('td');
+                    referenztasterAuslegerVorneCell.textContent = entry.werte['Referenztaster Ausleger vorne'];
+                    const referenztasterAuslegerHintenCell = document.createElement('td');
+                    referenztasterAuslegerHintenCell.textContent = entry.werte['Referenztaster Ausleger hinten'];
+
+                    row.appendChild(hVertikalCell);
+                    row.appendChild(hHorizontalCell);
+                    row.appendChild(referenztasterVertikalCell);
+                    row.appendChild(referenztasterAuslegerVorneCell);
+                    row.appendChild(referenztasterAuslegerHintenCell);
+
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.log(error));
+    </script>
 </body>
 </html>
