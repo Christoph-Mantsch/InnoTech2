@@ -44,7 +44,18 @@
     }
     
     .highlight {
+      background-color: blue !important;
+    }
+
+    .highlight-1{
       background-color: green !important;
+    }
+
+    .highlight-2{
+      background-color: red !important;
+    }
+    .highlight-3{
+      background-color: red !important;
     }
   </style>
   <script>
@@ -74,13 +85,22 @@
       const Hvertikal = item.werte[specificCategory];
       const Hhorizontal = item.werte[specificCategory2];
 
+     data[20].werte[specificCategory] = 89;
+     data[20].werte[specificCategory2]= 2345;
+
+
+      data[50].werte[specificCategory] = 89;
+      data[50].werte[specificCategory2]= 2345;
+
+
+
       valueCell1.textContent = item.datum;
       valueCell2.textContent = Hvertikal;
       valueCell3.textContent = Hhorizontal;
 
       if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
           (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
-        document.getElementById("cell1").classList.add("highlight");
+        toogleelement("cell11");
       }
 
       if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
@@ -95,7 +115,7 @@
 
       if ((parseFloat(Hhorizontal) >= 1610 && parseFloat(Hhorizontal) <= 1640) &&
           (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
-        document.getElementById("cell2").classList.add("highlight");
+        document.getElementById("cell12").classList.add("highlight");
       }
 
       if ((parseFloat(Hhorizontal) >= 1610 && parseFloat(Hhorizontal) <= 1640) &&
@@ -110,7 +130,7 @@
 
       if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
           (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
-        document.getElementById("cell3").classList.add("highlight");
+        document.getElementById("cell13").classList.add("highlight");
       }
 
       if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
@@ -122,16 +142,29 @@
           (parseFloat(Hvertikal) >= 885 && parseFloat(Hvertikal) <= 915)) {
         document.getElementById("cell9").classList.add("highlight");
       }
-
       dataIndex = (dataIndex + 1) % data.length;
 
-      setTimeout(displayData, 1000); // Aktualisierung alle 1 Sekunde
+      setTimeout(displayData, 100); // Aktualisierung alle 1 Sekunde
+
     }
 
-    // Aufruf der Funktion
-    document.addEventListener("DOMContentLoaded", function () {
+    function exec(e) {
       loadAndDisplayData();
-    });
+      document.getElementById("hid").hidden = true;
+    }
+
+
+    function toogleelement(id){
+      if(document.getElementById(id).classList.contains("highlight")){
+        document.getElementById(id).classList.remove("highlight"); return;
+      }
+      document.getElementById(id).classList.add("highlight");
+    }
+
+    function change(id){
+      toogleelement(id);
+    }
+
   </script>
 </head>
 <body>
@@ -165,9 +198,9 @@
       <tbody>
         <tr>
           <th>100</th>
-          <td id="cell1">Zelle 1</td>
-          <td id="cell2">Zelle 2</td>
-          <td id="cell3">Zelle 3</td>
+          <td id="cell11">Zelle 1</td>
+          <td id="cell12">Zelle 2</td>
+          <td id="cell13">Zelle 3</td>
         </tr>
         <tr>
           <th>450</th>
@@ -184,6 +217,27 @@
       </tbody>
     </table>
   </div>
+  <button onclick="exec(this)">Start</button>
+  <button onclick="exec1(this)">Stop</button>
+
+  <div id="hid">
+   <table>
+     <th>Leer</th>
+     <th>Rot</th>
+     <th>Gelb</th>
+     <th>Grün</th>
+   </table>
+  <input name="cb1" type="checkbox" onChange="change('cell11')">Box 1.1</input>
+  <input name="cb1" type="checkbox" onChange="change('cell4')">Box 1.2</input>
+  <input name="cb1" type="checkbox" onChange="change('cell7')">Box 1.3</input>
+  <input name="cb1" type="checkbox" onChange="change('cell12')">Box 2.1</input>
+  <input name="cb1" type="checkbox" onChange="change('cell5')">Box 2.2</input>
+  <input name="cb1" type="checkbox" onChange="change('cell8')">Box 2.2</input>
+  <input name="cb1" type="checkbox" onChange="change('cell13')">Box 3.1</input>
+  <input name="cb1" type="checkbox" onChange="change('cell6')">Box 3.2</input>
+  <input name="cb1" type="checkbox" onChange="change('cell9')">Box 3.3</input>
+  </div>
+
 </body>
 </html>
     
