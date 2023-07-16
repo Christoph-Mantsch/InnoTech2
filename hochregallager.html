@@ -52,7 +52,7 @@
   <script>
     let dataIndex = 0;
     let data = [];
-
+    let stop = false;
     function loadAndDisplayData() {
       fetch("https://it2wi1.if-lab.de/rest/ft_ablauf")
         .then(response => response.json())
@@ -134,7 +134,7 @@
         document.getElementById("cell9").classList.add("highlight");
       }
       dataIndex = (dataIndex + 1) % data.length;
-
+      if(stop)return;
       setTimeout(displayData, 1000); // Aktualisierung alle 1 Sekunde
 
     }
@@ -142,6 +142,8 @@
     function exec(e) {
       loadAndDisplayData();
       document.getElementById("hid").hidden = true;
+      stop = false;
+      document.getElementById("stopbtn").hidden = false;
     }
 
 
@@ -208,10 +210,10 @@
       </tbody>
     </table>
   </div>
+
   <div id="hid">
 
   <button onclick="exec(this)">Start</button>
- <!-- <button onclick="exec1(this)">Stop</button>-->
 
   <input name="cb1" type="checkbox" onChange="change('cell11')">Box 1.1</input>
   <input name="cb1" type="checkbox" onChange="change('cell4')">Box 1.2</input>
@@ -223,6 +225,7 @@
   <input name="cb1" type="checkbox" onChange="change('cell6')">Box 3.2</input>
   <input name="cb1" type="checkbox" onChange="change('cell9')">Box 3.3</input>
   </div>
+  <button id="stopbtn" onclick="stop = true;" hidden>Stop</button>
 
 </body>
 </html>
