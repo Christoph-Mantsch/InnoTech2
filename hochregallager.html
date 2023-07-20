@@ -89,24 +89,15 @@
       valueCell2.textContent = Hvertikal;
       valueCell3.textContent = Hhorizontal;
 
-      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
-          (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
-        toogleelement("cell11");
-      }
-
-      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
-          (parseFloat(Hvertikal) >= 425 && parseFloat(Hvertikal) <= 465)) {
-            toogleelement("cell4");
-      }
-
-      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
-          (parseFloat(Hvertikal) >= 885 && parseFloat(Hvertikal) <= 915)) {
-            toogleelement("cell7");
-      }
 
       if ((parseFloat(Hhorizontal) >= 1610 && parseFloat(Hhorizontal) <= 1640) &&
           (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
             toogleelement("cell12");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
+          (parseFloat(Hvertikal) >= 85 && parseFloat(Hvertikal) <= 115)) {
+        toogleelement("cell11");
       }
 
       if ((parseFloat(Hhorizontal) >= 1610 && parseFloat(Hhorizontal) <= 1640) &&
@@ -124,14 +115,25 @@
             toogleelement("cell13");
       }
 
-      if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
-          (parseFloat(Hvertikal) >= 425 && parseFloat(Hvertikal) <= 465)) {
-            toogleelement("cell6");
-      }
 
       if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
           (parseFloat(Hvertikal) >= 885 && parseFloat(Hvertikal) <= 915)) {
             toogleelement("cell9");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
+          (parseFloat(Hvertikal) >= 885 && parseFloat(Hvertikal) <= 915)) {
+            toogleelement("cell7");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 2330 && parseFloat(Hhorizontal) <= 2360) &&
+          (parseFloat(Hvertikal) >= 425 && parseFloat(Hvertikal) <= 465)) {
+            toogleelement("cell4");
+      }
+
+      if ((parseFloat(Hhorizontal) >= 885 && parseFloat(Hhorizontal) <= 915) &&
+          (parseFloat(Hvertikal) >= 425 && parseFloat(Hvertikal) <= 465)) {
+            toogleelement("cell6");
       }
       dataIndex = (dataIndex + 1) % data.length;
       if(stop)return;
